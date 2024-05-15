@@ -1,0 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font-family: 'open-sans';
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+}
