@@ -1,0 +1,19 @@
+/* Mobile (375px) */
+@media (min-width: 23.438rem) {
+    /* Add your mobile-specific styles here */
+  }
+  
+  /* Tablet (768px) */
+  @media (min-width: 48rem) {
+    /* Add your tablet-specific styles here */
+  }
+  
+  /* Laptop (1024px) */
+  @media (min-width: 64rem) {
+    /* Add your laptop-specific styles here */
+  }
+  
+  /* Desktop (1200px) */
+  @media (min-width: 75rem) {
+    /* Add your desktop-specific styles here */
+  }

@@ -1,12 +1,13 @@
 import {
   createBrowserRouter,
 } from "react-router-dom";
-import Nav from "./Nav";
+// import SidebarWithHeader from "./SidebarWithHeader";
+import NewRoute from "./NewRoute";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Nav />,
+    element: <NewRoute />,
     errorElement: <div>404 Not Found</div>,
     children: [
       {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <div>;alsdjf;lasjf;lasj;flkjas;lfja;lsjf;laksjf;lajs;lfkja;slkfdj</div>,
+        element: <div>1234</div>,
       },
       {
         path: "/contact",
