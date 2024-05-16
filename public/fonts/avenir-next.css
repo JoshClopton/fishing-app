@@ -1,0 +1,22 @@
+/* public/fonts/avenir-next/style.css */
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/src/assets/transfonter.org-20240516-202441/AvenirNextLTPro-Regular.woff2')
+      format('woff2'),
+    url('/src/assets/transfonter.org-20240516-202441/AvenirNextLTPro-Regular.woff')
+      format('woff');
+  font-weight: 400;
+  font-style: regular;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('/src/assets/transfonter.org-20240516-202441/AvenirNextLTPro-Bold.woff2')
+      format('woff2'),
+    url('/src/assets/transfonter.org-20240516-202441/AvenirNextLTPro-Bold.woff')
+      format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+/* Add other font weights and styles as needed */

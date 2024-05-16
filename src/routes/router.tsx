@@ -3,6 +3,7 @@ import {
 } from "react-router-dom";
 // import SidebarWithHeader from "./SidebarWithHeader";
 import NewRoute from "./NewRoute";
+import WaterDetails from "../components/WaterDetails";
 
 const router = createBrowserRouter([
   {
@@ -15,12 +16,12 @@ const router = createBrowserRouter([
         element: <div>Home</div>,
       },
       {
-        path: "/about",
+        path: "/Home",
         element: <div>1234</div>,
       },
       {
-        path: "/contact",
-        element: <div>Contact</div>,
+        path: "/Animas",
+        element: <WaterDetails />,
       },
     ],
   },
