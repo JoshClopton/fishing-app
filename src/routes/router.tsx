@@ -1,26 +1,25 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 // import SidebarWithHeader from "./SidebarWithHeader";
-import NewRoute from "./NewRoute";
-import WaterDetails from "../components/WaterDetails";
+import NewRoute from './NewRoute';
+import WaterDetails from '../components/WaterDetails';
+import Home from './Home';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <NewRoute />,
     errorElement: <div>404 Not Found</div>,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <div>Home</div>,
       },
       {
-        path: "/Home",
-        element: <div>1234</div>,
+        path: '/Home',
+        element: <Home />,
       },
       {
-        path: "/Animas",
+        path: '/:id',
         element: <WaterDetails />,
       },
     ],

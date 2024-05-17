@@ -34,16 +34,18 @@ import { IconType } from 'react-icons';
 import { Outlet } from 'react-router-dom';
 import React from 'react';
 import TopBar from '../components/TopBar/TopBar';
+import ProfileImage from '../assets/images/10411979_10203296234399693_878618849183583347_n.jpg';
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  id: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Animas', icon: FiTrendingUp },
-  { name: 'Arkansas', icon: FiCompass },
-  { name: 'Blue', icon: FiStar },
+  { name: 'Home', icon: FiHome, id: 'Home' },
+  { name: 'Animas', icon: FiTrendingUp, id: 'Animas' },
+  { name: 'Arkansas', icon: FiCompass, id: 'Arkansas' },
+  { name: 'Blue', icon: FiStar, id: 'Blue' },
 ];
 
 export default function SidebarWithHeader() {
@@ -107,15 +109,24 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         justifyContent="space-between"
         marginBottom="2.5rem"
       >
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        {/* <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+          Gold Medal Waters
+        </Text> */}
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
         <Box onClick={onClose}>
           <NavItem key={link.name} icon={link.icon}>
-            <Link to={link.name} style={{ textDecoration: 'none' }}>
+            <Link
+              to={link.id}
+              style={{
+                textDecoration: 'none',
+                fontSize: '0.75rem',
+                lineHeight: '1.25rem',
+                fontWeight: '700',
+                fontFamily: 'Avenir Next, sans-serif',
+              }}
+            >
               {link.name}
             </Link>
           </NavItem>
@@ -185,14 +196,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-      <Text
+      {/* <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold"
       >
-        Logo
-      </Text>
+        Gold Medal Waters
+      </Text> */}
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <IconButton
@@ -209,12 +220,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               _focus={{ boxShadow: 'none' }}
             >
               <HStack>
-                <Avatar
-                  size={'sm'}
-                  src={
-                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                  }
-                />
+                <Avatar size={'sm'} src={ProfileImage} />
                 <VStack
                   display={{ base: 'none', md: 'flex' }}
                   alignItems="flex-start"

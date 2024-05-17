@@ -1,7 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import theme from '../theme';
 import waterData from '../mockData';
+import { useLocation } from 'react-router-dom';
+
+type Water = {
+  id: number;
+  name: string;
+  location: string;
+  coordinates: string;
+  description: string;
+  image: string;
+};
 
 const WaterDetails = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,16 +20,30 @@ const WaterDetails = () => {
   const [loading, setLoading] = React.useState(true);
 
   const { fontStyles } = theme;
+  const location = useLocation();
+  const locationId = location.pathname.split('/')[1];
 
   React.useEffect(() => {
-    setWater(waterData[0]);
+    const filteredWater = waterData.filter(
+      (water: Water) => water.name === locationId
+    );
+    console.log('filteredWater', filteredWater);
+    setWater(filteredWater);
     setLoading(false);
-  }, []);
+  }, [locationId]);
+
+  const {
+    name,
+    image,
+    location: waterLocation,
+    coordinates,
+    description,
+  } = water[0];
   return (
-    <Box w={['inherit', '50rem']}>
+    <Flex flexDirection="column" w={['inherit', '50rem']} alignItems="center">
       {loading ? <div>Loading...</div> : null}
-      <Box paddingBottom="1rem">
-        <img src={water?.image} />
+      <Box paddingBottom="1rem" maxW={['inherit', '75%']} textAlign="center">
+        <img src={image} />
       </Box>
       <Flex
         flexDirection="column"
@@ -32,7 +57,7 @@ const WaterDetails = () => {
           textAlign="center"
           marginBottom="1rem"
         >
-          <Heading {...fontStyles.mobilePageHeader}>{water.name}</Heading>
+          <Heading {...fontStyles.mobilePageHeader}>{name}</Heading>
         </Box>
         <Box
           w="100%"
@@ -40,11 +65,9 @@ const WaterDetails = () => {
           textAlign="center"
           marginBottom="1rem"
         >
-          <Heading {...fontStyles.mobileSectionHeader}>
-            {water.location}
-          </Heading>
+          <Heading {...fontStyles.mobileSectionHeader}>{waterLocation}</Heading>
           <Heading marginBottom="1rem" {...fontStyles.mobileBody}>
-            {water.concordinates}
+            {coordinates}
           </Heading>
         </Box>
         <Box
@@ -54,11 +77,11 @@ const WaterDetails = () => {
           marginBottom="1rem"
         >
           <Text {...fontStyles.mobileBody} marginBottom="1rem">
-            {water.description}
+            {description}
           </Text>
         </Box>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
