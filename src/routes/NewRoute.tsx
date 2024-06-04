@@ -32,9 +32,10 @@ import {
 import { Link } from 'react-router-dom';
 import { IconType } from 'react-icons';
 import { Outlet } from 'react-router-dom';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopBar from '../components/TopBar/TopBar';
 import ProfileImage from '../assets/images/10411979_10203296234399693_878618849183583347_n.jpg';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string;
@@ -50,6 +51,15 @@ const LinkItems: Array<LinkItemProps> = [
 
 export default function SidebarWithHeader() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('/Home');
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
   return (
     <>
       <TopBar display={['none', 'flex']} onOpen={onOpen} />
