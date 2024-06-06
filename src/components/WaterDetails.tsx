@@ -4,6 +4,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import theme from '../theme';
 import waterData from '../mockData';
 import { useLocation } from 'react-router-dom';
+import { gql, useQuery } from '@apollo/client';
 
 type Water = {
   id: number;
@@ -14,6 +15,19 @@ type Water = {
   image: string;
 };
 
+const GET_GOLD_MEDAL_WATER = gql`
+  query GoldMedalWater($name: String!) {
+    goldMedalWater(name: $name) {
+      description
+      id
+      image
+      location
+      name
+      coordinates
+    }
+  }
+`;
+
 const WaterDetails = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [water, setWater] = React.useState<any>([{}]);
@@ -22,6 +36,16 @@ const WaterDetails = () => {
   const { fontStyles } = theme;
   const location = useLocation();
   const locationId = location.pathname.split('/')[1];
+  const {
+    loading: queryLoading,
+    error,
+    data,
+  } = useQuery(GET_GOLD_MEDAL_WATER, {
+    variables: { name: locationId },
+  });
+  console.log('data', data);
+  console.log('error', error);
+  console.log('queryLoading', queryLoading);
 
   React.useEffect(() => {
     const filteredWater = waterData.filter(
@@ -32,13 +56,16 @@ const WaterDetails = () => {
     setLoading(false);
   }, [locationId]);
 
+  const { image } = water[0];
+
+  const { goldMedalWater } = data || {};
   const {
-    name,
-    image,
-    location: waterLocation,
-    coordinates,
-    description,
-  } = water[0];
+    description: goldMedalDescription,
+    name: goldMedalName,
+    location: goldMedalLocation,
+    coordinates: goldMedalCoordinates,
+  } = goldMedalWater || {};
+
   return (
     <Flex flexDirection="column" w={['inherit', '50rem']} alignItems="center">
       {loading ? <div>Loading...</div> : null}
@@ -57,7 +84,7 @@ const WaterDetails = () => {
           textAlign="center"
           marginBottom="1rem"
         >
-          <Heading {...fontStyles.mobilePageHeader}>{name}</Heading>
+          <Heading {...fontStyles.mobilePageHeader}>{goldMedalName}</Heading>
         </Box>
         <Box
           w="100%"
@@ -65,9 +92,11 @@ const WaterDetails = () => {
           textAlign="center"
           marginBottom="1rem"
         >
-          <Heading {...fontStyles.mobileSectionHeader}>{waterLocation}</Heading>
+          <Heading {...fontStyles.mobileSectionHeader}>
+            {goldMedalLocation}
+          </Heading>
           <Heading marginBottom="1rem" {...fontStyles.mobileBody}>
-            {coordinates}
+            {goldMedalCoordinates}
           </Heading>
         </Box>
         <Box
@@ -77,7 +106,7 @@ const WaterDetails = () => {
           marginBottom="1rem"
         >
           <Text {...fontStyles.mobileBody} marginBottom="1rem">
-            {description}
+            {goldMedalDescription}
           </Text>
         </Box>
       </Flex>
